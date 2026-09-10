@@ -25,6 +25,9 @@ healthy-nation-app/
 ├── constants/
 │   ├── colors.ts                 # Color palette
 │   └── mocks.ts                  # Mock data
+├── lib/
+│   └── ai.ts                     # OpenAI / Perplexity client
+├── assets/                       # Icon, splash, favicon
 ├── app.json                      # Expo configuration
 ├── tsconfig.json                 # TypeScript config
 ├── package.json                  # Dependencies
@@ -32,9 +35,9 @@ healthy-nation-app/
 └── README.md                     # Project documentation
 ```
 
-## File Creation Instructions
+## Reference Configuration
 
-Follow the detailed code sections below to create each file:
+All files below already exist in the repository; they are reproduced here for reference.
 
 ### 1. app.json
 
@@ -46,6 +49,7 @@ Follow the detailed code sections below to create each file:
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "scheme": "healthynation",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -55,7 +59,7 @@ Follow the detailed code sections below to create each file:
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTabletMode": true,
+      "supportsTablet": true,
       "bundleIdentifier": "com.healthynation.app"
     },
     "android": {
@@ -66,7 +70,13 @@ Follow the detailed code sections below to create each file:
       "package": "com.healthynation.app"
     },
     "web": {
+      "bundler": "metro",
+      "output": "static",
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
@@ -76,26 +86,17 @@ Follow the detailed code sections below to create each file:
 
 ```json
 {
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "lib": ["ES2020"],
-    "moduleResolution": "bundler",
-    "module": "ESNext",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
     "strict": true,
-    "target": "ES2020",
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
@@ -135,7 +136,7 @@ export default Colors;
 ```typescript
 export const VITALS = [
   { id: 'heartRate', label: 'Heart Rate', value: 72, unit: 'bpm', trend: 'stable', icon: 'Heart' },
-  { id: 'blood Pressure', label: 'BP', value: '120/80', unit: 'mmHg', trend: 'stable', icon: 'Activity' },
+  { id: 'bloodPressure', label: 'BP', value: '120/80', unit: 'mmHg', trend: 'stable', icon: 'Activity' },
   { id: 'spo2', label: 'SpO₂', value: 98, unit: '%', trend: 'optimal', icon: 'Wind' },
   { id: 'glucose', label: 'Glucose', value: 95, unit: 'mg/dL', trend: 'normal', icon: 'Droplet' },
 ];
@@ -240,8 +241,8 @@ EXPO_PUBLIC_OPENAI_API_KEY=your_api_key_here
 ```
 
 The app auto-detects API key type:
-- sk-... → OpenAI (GPT-4o)
-- pplx-... → Perplexity (llama-3.1-sonar)
+- sk-... → OpenAI (gpt-4o)
+- pplx-... → Perplexity (sonar)
 
 ## Running the App
 
@@ -254,11 +255,8 @@ npx expo start
 
 ## Next Steps
 
-1. Create the directory structure
-2. Create each TypeScript/React Native file using the code from this guide
-3. Copy the component code into respective files
-4. Install dependencies: `npm install`
-5. Run the app: `npx expo start`
-6. Scan QR code with Expo Go on your phone
-
-For detailed component code, refer to the Rork project or implement based on the descriptions above.
+1. Install dependencies: `npm install`
+2. (Optional) create `.env` with your API key
+3. Run the app: `npm start`
+4. Scan the QR code with Expo Go on your phone
+5. Verify code quality with `npm run lint` and `npm run typecheck`

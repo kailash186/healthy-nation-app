@@ -49,12 +49,15 @@ An AI-powered mobile health monitoring application designed to address early det
 - **State Management**: React Hooks
 - **AI Integration**: OpenAI/Perplexity API
 
+## Requirements
+
+- Node.js 20+ and npm
+- Expo Go on your phone, or an iOS/Android simulator
+
 ## Installation
 
 ```bash
 npm install
-# or
-bun install
 ```
 
 ## Environment Variables
@@ -68,10 +71,11 @@ EXPO_PUBLIC_OPENAI_API_KEY=your_api_key_here
 ## Running the App
 
 ```bash
-npx expo start
+npm start          # Expo dev server (scan QR with Expo Go)
+npm run web        # Run in the browser
+npm run lint       # ESLint
+npm run typecheck  # TypeScript
 ```
-
-Scan the QR code with Expo Go app or run on emulator.
 
 ## Project Structure
 
@@ -99,6 +103,9 @@ components/
 constants/
   colors.ts          # Color palette
   mocks.ts           # Mock data
+
+lib/
+  ai.ts              # OpenAI / Perplexity chat client
 ```
 
 ## Features in Detail
@@ -119,9 +126,11 @@ Supports integration with:
 ## API Integration
 
 ### OpenAI/Perplexity API
-The app automatically detects your API key type:
-- **OpenAI keys** (sk-...): Uses GPT-4o model
-- **Perplexity keys** (pplx-...): Uses llama-3.1-sonar model
+The app automatically detects your API key type (see `lib/ai.ts`):
+- **OpenAI keys** (`sk-...`): Uses the `gpt-4o` model
+- **Perplexity keys** (`pplx-...`): Uses the `sonar` model
+
+If no key is set, the assistant runs in an offline fallback mode.
 
 ## License
 

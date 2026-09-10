@@ -1,8 +1,8 @@
 export const Colors = {
-  primary: '#5B9CF6',           // Medical Blue
-  secondary: '#F472B6',         // Soft Pink
-  accent: '#14B8A6',            // Teal
-  background: '#F8FAFC',        // Light Gray
+  primary: '#5B9CF6', // Medical Blue
+  secondary: '#F472B6', // Soft Pink
+  accent: '#14B8A6', // Teal
+  background: '#F8FAFC', // Light Gray
   lightBackground: '#ffffff',
   surface: '#ffffff',
 
@@ -21,6 +21,6 @@ export const Colors = {
     error: '#EF4444',
     info: '#3B82F6',
   },
-};
+} as const;
 
 export default Colors;

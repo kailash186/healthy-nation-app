@@ -41,3 +41,17 @@ yarn-error.log*
 
 # Yarn
 .yarn/install-state.gz
+
+# Expo (generated)
+expo-env.d.ts
+web-build/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Native projects (managed workflow)
+/ios
+/android
