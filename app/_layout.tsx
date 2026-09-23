@@ -8,6 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/colors';
 import { Fonts } from '@/constants/typography';
+import { HealthDataProvider } from '@/lib/data/store';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -26,20 +27,29 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerTintColor: Colors.onPrimary,
-            headerStyle: { backgroundColor: Colors.navy },
-            headerTitleStyle: { fontFamily: Fonts.heading, color: Colors.onPrimary },
-            headerShadowVisible: false,
-            contentStyle: { backgroundColor: Colors.background },
-          }}
-        >
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="pharmacy" options={{ headerShown: false }} />
-          <Stack.Screen name="checkout/index" options={{ title: 'Checkout' }} />
-        </Stack>
+        <HealthDataProvider>
+          <StatusBar style="light" />
+          <Stack
+            screenOptions={{
+              headerTintColor: Colors.onPrimary,
+              headerStyle: { backgroundColor: Colors.navy },
+              headerTitleStyle: { fontFamily: Fonts.heading, color: Colors.onPrimary },
+              headerBackTitle: 'Back',
+              headerShadowVisible: false,
+              contentStyle: { backgroundColor: Colors.background },
+            }}
+          >
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="appointments/[id]" options={{ title: 'Appointment' }} />
+            <Stack.Screen name="tasks/[id]" options={{ title: 'Task' }} />
+            <Stack.Screen name="tasks/new" options={{ title: 'New task', presentation: 'modal' }} />
+            <Stack.Screen name="updates/[id]" options={{ title: 'Update' }} />
+            <Stack.Screen name="providers/[id]" options={{ title: 'Provider' }} />
+            <Stack.Screen name="people/[id]" options={{ title: 'Profile' }} />
+            <Stack.Screen name="records/[id]" options={{ title: 'Record' }} />
+            <Stack.Screen name="care-plans/[id]" options={{ title: 'Care plan' }} />
+          </Stack>
+        </HealthDataProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

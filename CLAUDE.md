@@ -1,6 +1,7 @@
 # Healthy Nation App — Agent Notes
 
 Expo SDK 54 / React Native 0.81 / React 19 / TypeScript / Expo Router.
+Personal healthcare dashboard + care coordination. Data layer in `lib/data/` (types, seed, store, selectors); UI kit in `components/ui/`; routes in `app/`.
 
 ## Commands
 

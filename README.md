@@ -1,161 +1,82 @@
-# Healthy Nation App
+# Healthy Nation
 
-An AI-powered mobile health monitoring application designed to address early detection and remote monitoring of chronic diseases with access to quality healthcare.
+A calm, personal healthcare dashboard and care-coordination app. See your health information in one place, keep track of appointments, care tasks, reminders and updates, and always know what needs attention next — for yourself and for the family members you care for.
 
-## Features
-
-### 1. Dashboard (Home Screen)
-- **Daily Vitals**: Real-time health data (Heart Rate, SpO2, BP, Glucose) with trend indicators
-- **AI Symptom Check Banner**: Quick access to health checkups
-- **Upcoming Appointments**: List of scheduled doctor visits with video call options
-- **Quick Services**: Fast access to Pharmacy, Emergency, Doctors, and Delivery
-
-### 2. AI Health Assistant
-- **Symptom Checker**: Describe symptoms and get AI-powered analysis
-- **Health Parameter Monitoring**: Tracks normal and abnormal vital ranges
-- **Emergency Alerts**: Immediate alerts for critical conditions
-- **Medication Recommendations**: Personalized treatment suggestions
-
-### 3. Find Doctors
-- **Doctor Search**: Find specialists by condition
-- **Doctor Profiles**: View experience, qualifications, and success rates
-- **Rating System**: Hospital and doctor rankings based on customer service
-- **Appointment Booking**: Schedule visits and online consultations
-
-### 4. Profile & Medical History
-- **Virtual Medical Records**: Complete health history without physical documents
-- **Health Stats**: Quick overview of age, blood type, weight
-- **Medical Timeline**: Past visits and results
-- **Settings**: Connected devices, insurance, preferences
-
-### 5. Pharmacy & Local Services
-- **Medical Shop Locator**: Find nearby pharmacies with ratings
-- **24/7 Emergency Shops**: Highlighted for emergency needs
-- **Local Delivery**: Integration with local delivery apps
-- **Payment Options**: Credit/Debit, Apple Pay, Cash on Delivery
-
-### 6. Fitness Tracker Integration
-- **Bluetooth Connection**: Seamless smartwatch/fitness band pairing
-- **Health Metrics**: Heart Rate, Blood Pressure, SpO2, ECG, Body Composition
-- **Distance Tracking**: Steps and distance walked
-- **Real-time Sync**: Live data synchronization from wearable devices
-
-## Design
-
-The app uses the **Ocean Depths** theme from the bundled `theme-factory` skill:
-
-| Role | Colour |
-|---|---|
-| Deep Navy `#1a2332` | headers, hero, primary text |
-| Teal `#2d8b8b` | primary actions, active tab |
-| Seafoam `#a8dadc` | secondary accents, chips |
-| Cream `#f1faee` | app background |
-
-Typography: Instrument Sans (Regular/Bold), loaded from `assets/fonts/` via `expo-font`.
-Tokens live in `constants/colors.ts` and `constants/typography.ts`.
+Built with **Expo SDK 54 / React Native 0.81 / Expo Router 6 / TypeScript**. One codebase runs as a responsive web app (desktop sidebar, mobile bottom tabs) and as native iOS/Android apps.
 
 ## Screenshots
 
-![All screens](docs/screenshots/overview.png)
+**Desktop**
 
-Individual screens are in [`docs/screenshots/`](docs/screenshots/).
+![Desktop overview](docs/screenshots/overview-desktop.png)
 
-## Tech Stack
+**Mobile**
 
-- **Framework**: React Native with Expo
-- **Language**: TypeScript
-- **Navigation**: Expo Router
-- **Icons**: lucide-react-native
-- **State Management**: React Hooks
-- **AI Integration**: OpenAI/Perplexity API
+![Mobile overview](docs/screenshots/overview-mobile.png)
 
-## Requirements
+## What it does
 
-- Node.js 20+ and npm
-- Expo Go on your phone, or an iOS/Android simulator
+| Area | Details |
+|---|---|
+| **Dashboard** | Ranked *Needs attention* list (urgent updates, overdue/today tasks, imminent appointments, due reminders), next appointment, today's reminders with one-tap "Done", latest vitals, recent updates. |
+| **Care circle** | Switch between *Everyone* and each person (self, parent, child…). Every list filters accordingly. Person profiles show vitals, care plans, appointments, tasks, records, notes and providers. |
+| **Appointments** | Upcoming visits grouped by day, past visits with summaries, prep notes, join-video / directions / call actions, linked tasks. |
+| **Care tasks** | Overdue / up next / completed, priority, due dates, links to visits and providers. Quick "Add task" form. |
+| **Reminders** | Medication and check-in schedules, pause/resume, acknowledged-today state. |
+| **Updates** | Lab results, provider messages and alerts by severity; mark read / mark all read; links to underlying records. |
+| **Records & care plans** | Structured lab values with flags, visit notes, prescriptions, vaccinations; care plans with goal, steps and progress. |
+| **Empty states** | Every list has a friendly empty state explaining what will appear there. |
 
-## Installation
+## Architecture
+
+```
+app/                     Expo Router routes
+  (tabs)/                Dashboard, Appointments, Tasks, Updates, Care circle, Reminders
+  appointments/[id]      Detail views
+  tasks/[id], tasks/new
+  updates/[id]  providers/[id]  people/[id]  records/[id]  care-plans/[id]
+components/
+  ui/                    Design system: Screen, Card, Text, Button, Badge, Avatar, ListRow, EmptyState…
+  *.tsx                  Domain components (AttentionList, AppointmentCard, TaskRow, PersonSwitcher…)
+lib/
+  data/types.ts          Domain model (Person, Provider, Appointment, CareTask, Reminder, HealthUpdate,
+                         HealthRecord, Vital, Note, CarePlan)
+  data/seed.ts           Placeholder data (dates are relative to today)
+  data/store.tsx         Local-first store: React context + AsyncStorage persistence
+  data/selectors.ts      Derived views incl. the needsAttention() ranking
+  format.ts              Date/label helpers
+constants/               Theme tokens (Ocean Depths palette, Instrument Sans)
+```
+
+**Adding a real backend:** replace `lib/data/store.tsx` with an API-backed provider that exposes the same `useHealthData()` contract. Screens and selectors don't need to change. The data model already carries IDs, timestamps and per-person scoping.
+
+## Getting started
 
 ```bash
 npm install
+npm run web        # browser (desktop + responsive mobile)
+npm start          # Expo dev server — scan QR with Expo Go for native
+npm run lint
+npm run typecheck
 ```
 
-## Environment Variables
+Demo data is persisted in local storage after first load; clear site data (or call `resetToSeed()` from the store) to start fresh.
 
-Create a `.env` file with:
+## Design
 
-```
-EXPO_PUBLIC_OPENAI_API_KEY=your_api_key_here
-```
+Theme **Ocean Depths** (from the bundled `theme-factory` skill): deep navy `#1a2332`, teal `#2d8b8b`, seafoam `#a8dadc`, cream `#f1faee`. Typography: Instrument Sans (OFL). Tokens in `constants/colors.ts` and `constants/typography.ts`.
 
-## Running the App
+## Testing
+
+Playwright smoke test covering all routes at mobile and desktop widths, plus a task-toggle interaction:
 
 ```bash
-npm start          # Expo dev server (scan QR with Expo Go)
-npm run web        # Run in the browser
-npm run lint       # ESLint
-npm run typecheck  # TypeScript
+pip install playwright && python3 -m playwright install chromium   # one-time
+python3 .claude/skills/webapp-testing/scripts/with_server.py \
+  --server "npx expo start --web --port 8081" --port 8081 \
+  -- python3 tests/e2e/smoke_web.py
 ```
-
-## Project Structure
-
-```
-app/
-  (tabs)/
-    _layout.tsx      # Tab navigation
-    index.tsx        # Home dashboard
-    assistant.tsx    # AI chatbot
-    doctors.tsx      # Doctor finder
-    profile.tsx      # User profile
-    health.tsx       # Health monitoring
-  pharmacy/
-    _layout.tsx      # Pharmacy routes
-    index.tsx        # Shop listing
-    [id].tsx         # Shop details
-  checkout/
-    index.tsx        # Checkout flow
-  _layout.tsx        # Root layout
-  +not-found.tsx     # Not found page
-
-components/
-  BluetoothScanner.tsx  # Device pairing UI
-
-constants/
-  colors.ts          # Color palette
-  mocks.ts           # Mock data
-
-lib/
-  ai.ts              # OpenAI / Perplexity chat client
-```
-
-## Features in Detail
-
-### Health Monitoring
-- Heart Rate: 60-100 bpm (Normal)
-- Blood Pressure: 90-120 / 60-80 mmHg
-- SpO2: 95-100% (Normal)
-- ECG: Normal Sinus Rhythm
-- Blood Sugar: 70-99 mg/dL (Fasting)
-
-### Wearable Devices
-Supports integration with:
-- Smartwatches (Apple Watch, Wear OS)
-- Fitness Bands
-- Health Rings
-
-## API Integration
-
-### OpenAI/Perplexity API
-The app automatically detects your API key type (see `lib/ai.ts`):
-- **OpenAI keys** (`sk-...`): Uses the `gpt-4o` model
-- **Perplexity keys** (`pplx-...`): Uses the `sonar` model
-
-If no key is set, the assistant runs in an offline fallback mode.
 
 ## License
 
-MIT License
-
-## Support
-
-For issues and questions, please create an issue in the repository.
+MIT

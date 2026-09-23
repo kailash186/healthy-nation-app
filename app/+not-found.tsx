@@ -1,24 +1,20 @@
 import { Link, Stack } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Compass } from 'lucide-react-native';
 
-import { Colors } from '@/constants/colors';
+import { Button, Card, EmptyState, Screen } from '@/components/ui';
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
-      <View style={styles.container}>
-        <Text style={styles.title}>This screen doesn&apos;t exist.</Text>
-        <Link href="/" style={styles.link}>
-          Go to home screen
-        </Link>
-      </View>
+      <Stack.Screen options={{ title: 'Not found' }} />
+      <Screen maxWidth={600}>
+        <Card>
+          <EmptyState icon={Compass} title="We couldn’t find that page" message="The link may be old or mistyped. Head back to the dashboard to pick up where you left off." />
+          <Link href="/" asChild>
+            <Button label="Go to dashboard" variant="secondary" style={{ alignSelf: 'center' }} />
+          </Link>
+        </Card>
+      </Screen>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20 },
-  title: { fontSize: 20, fontWeight: '600', color: Colors.light.text },
-  link: { marginTop: 15, paddingVertical: 15, color: Colors.primary },
-});
