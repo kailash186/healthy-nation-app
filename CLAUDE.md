@@ -38,3 +38,11 @@ python3 .claude/skills/webapp-testing/scripts/with_server.py \
   --server "npx expo start --web --port 8081" --port 8081 \
   -- python3 tests/e2e/smoke_web.py
 ```
+
+## Visual design assets
+
+Use the `canvas-design` skill in `.claude/skills/canvas-design/` for posters,
+marketing art, splash/onboarding visuals, or any static .png/.pdf artwork.
+Bundled OFL fonts are in `.claude/skills/canvas-design/canvas-fonts/`.
+Output design philosophy as `.md` alongside the final `.png`/`.pdf`; keep
+generated artwork out of the app bundle unless it is used in `assets/`.
