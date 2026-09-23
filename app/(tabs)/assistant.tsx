@@ -79,7 +79,12 @@ export default function AssistantScreen() {
         }
       />
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.chips}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.chipsScroll}
+        contentContainerStyle={styles.chips}
+      >
         {SUGGESTIONS.map((suggestion) => (
           <Pressable key={suggestion} style={styles.chip} onPress={() => send(suggestion)}>
             <Text style={styles.chipText}>{suggestion}</Text>
@@ -119,7 +124,8 @@ const styles = StyleSheet.create({
   },
   userText: { color: '#fff' },
   assistantText: { color: Colors.light.text },
-  chips: { paddingHorizontal: 16, paddingVertical: 8, gap: 8 },
+  chipsScroll: { flexGrow: 0 },
+  chips: { paddingHorizontal: 16, paddingVertical: 8, gap: 8, alignItems: 'center' },
   chip: {
     backgroundColor: Colors.surface,
     borderColor: Colors.light.border,

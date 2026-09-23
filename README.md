@@ -40,6 +40,12 @@ An AI-powered mobile health monitoring application designed to address early det
 - **Distance Tracking**: Steps and distance walked
 - **Real-time Sync**: Live data synchronization from wearable devices
 
+## Screenshots
+
+![All screens](docs/screenshots/overview.png)
+
+Individual screens are in [`docs/screenshots/`](docs/screenshots/).
+
 ## Tech Stack
 
 - **Framework**: React Native with Expo
