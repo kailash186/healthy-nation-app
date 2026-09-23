@@ -55,3 +55,7 @@ web-build/
 # Native projects (managed workflow)
 /ios
 /android
+
+# Python
+__pycache__/
+*.pyc

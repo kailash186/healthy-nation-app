@@ -25,3 +25,16 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<topic>" --domain ux
 ```
 
 Theme tokens live in `constants/colors.ts`; icons come from `lucide-react-native`.
+
+## Browser testing
+
+Use the `webapp-testing` skill in `.claude/skills/webapp-testing/` (Playwright).
+Run `python3 .claude/skills/webapp-testing/scripts/with_server.py --help` first.
+A ready-made smoke test for the web build lives in `tests/e2e/smoke_web.py`:
+
+```bash
+pip install playwright && python3 -m playwright install chromium   # one-time
+python3 .claude/skills/webapp-testing/scripts/with_server.py \
+  --server "npx expo start --web --port 8081" --port 8081 \
+  -- python3 tests/e2e/smoke_web.py
+```
