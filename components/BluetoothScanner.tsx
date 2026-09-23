@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 
 export interface WearableDevice {
   id: string;
@@ -101,7 +102,7 @@ export default function BluetoothScanner({ visible, onClose, onConnected }: Prop
 const styles = StyleSheet.create({
   backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', padding: 24 },
   sheet: { backgroundColor: Colors.surface, borderRadius: 20, padding: 24, alignItems: 'center' },
-  title: { marginTop: 12, fontSize: 17, fontWeight: '700', color: Colors.light.text },
+  title: { marginTop: 12, fontSize: 17, fontFamily: Fonts.heading, color: Colors.light.text },
   deviceRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  deviceName: { color: Colors.light.text, fontWeight: '500' },
+  deviceName: { color: Colors.light.text, fontFamily: Fonts.body },
   cancel: { marginTop: 20 },
-  cancelText: { color: Colors.light.textSecondary },
+  cancelText: { fontFamily: Fonts.body, color: Colors.light.textSecondary },
 });

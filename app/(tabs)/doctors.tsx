@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { Alert, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { DOCTORS } from '@/constants/mocks';
 
 export default function DoctorsScreen() {
@@ -80,9 +81,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  searchInput: { flex: 1, paddingVertical: 12, color: Colors.light.text },
+  searchInput: { fontFamily: Fonts.body, flex: 1, paddingVertical: 12, color: Colors.light.text },
   list: { paddingHorizontal: 16, paddingBottom: 24, gap: 12 },
-  empty: { textAlign: 'center', color: Colors.light.textSecondary, marginTop: 40 },
+  empty: { fontFamily: Fonts.body, textAlign: 'center', color: Colors.light.textSecondary, marginTop: 40 },
   card: {
     backgroundColor: Colors.surface,
     borderRadius: 16,
@@ -91,10 +92,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.border,
   },
   cardHeader: { flexDirection: 'row', alignItems: 'flex-start' },
-  name: { fontSize: 16, fontWeight: '700', color: Colors.light.text },
-  meta: { color: Colors.light.textSecondary, fontSize: 13, marginTop: 2 },
+  name: { fontSize: 16, fontFamily: Fonts.heading, color: Colors.light.text },
+  meta: { fontFamily: Fonts.body, color: Colors.light.textSecondary, fontSize: 13, marginTop: 2 },
   rating: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  ratingText: { fontSize: 13, color: Colors.light.text },
+  ratingText: { fontFamily: Fonts.body, fontSize: 13, color: Colors.light.text },
   button: {
     marginTop: 14,
     backgroundColor: Colors.primary,
@@ -103,5 +104,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonDisabled: { backgroundColor: Colors.light.tabIconDefault },
-  buttonText: { color: '#fff', fontWeight: '600' },
+  buttonText: { color: Colors.onPrimary, fontFamily: Fonts.heading },
 });

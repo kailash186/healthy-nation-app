@@ -15,6 +15,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { askHealthAssistant, type ChatMessage } from '@/lib/ai';
 
 const SUGGESTIONS = ['Headache and fever', 'Chest tightness', 'Shortness of breath', 'High blood sugar'];
@@ -104,7 +105,7 @@ export default function AssistantScreen() {
           editable={!loading}
         />
         <Pressable style={styles.sendButton} onPress={() => send(input)} disabled={loading}>
-          <Send color="#fff" size={18} />
+          <Send color={Colors.onPrimary} size={18} />
         </Pressable>
       </View>
     </KeyboardAvoidingView>
@@ -115,26 +116,26 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
   list: { padding: 16, gap: 10 },
   bubble: { maxWidth: '85%', borderRadius: 16, padding: 12 },
-  userBubble: { alignSelf: 'flex-end', backgroundColor: Colors.primary },
+  userBubble: { alignSelf: 'flex-end', backgroundColor: Colors.navy },
   assistantBubble: {
     alignSelf: 'flex-start',
     backgroundColor: Colors.surface,
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  userText: { color: '#fff' },
-  assistantText: { color: Colors.light.text },
+  userText: { fontFamily: Fonts.body, color: Colors.onPrimary },
+  assistantText: { fontFamily: Fonts.body, color: Colors.light.text },
   chipsScroll: { flexGrow: 0 },
   chips: { paddingHorizontal: 16, paddingVertical: 8, gap: 8, alignItems: 'center' },
   chip: {
-    backgroundColor: Colors.surface,
-    borderColor: Colors.light.border,
+    backgroundColor: Colors.seafoamTint,
+    borderColor: Colors.secondary,
     borderWidth: 1,
     borderRadius: 999,
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  chipText: { color: Colors.light.text, fontSize: 13 },
+  chipText: { fontFamily: Fonts.body, color: Colors.primaryDark, fontSize: 13 },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: Colors.light.border,
   },
-  input: {
+  input: { fontFamily: Fonts.body,
     flex: 1,
     backgroundColor: Colors.background,
     borderRadius: 999,

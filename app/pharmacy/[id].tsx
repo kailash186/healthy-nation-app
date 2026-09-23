@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { MEDICAL_SHOPS } from '@/constants/mocks';
 
 export default function PharmacyDetailScreen() {
@@ -40,9 +41,9 @@ export default function PharmacyDetailScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background, padding: 20 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  name: { fontSize: 22, fontWeight: '700', color: Colors.light.text },
-  meta: { color: Colors.light.textSecondary, marginTop: 6 },
-  badge: { marginTop: 12, color: Colors.status.error, fontWeight: '600' },
+  name: { fontSize: 22, fontFamily: Fonts.heading, color: Colors.light.text },
+  meta: { fontFamily: Fonts.body, color: Colors.light.textSecondary, marginTop: 6 },
+  badge: { marginTop: 12, color: Colors.status.error, fontFamily: Fonts.heading },
   button: {
     marginTop: 28,
     backgroundColor: Colors.primary,
@@ -50,5 +51,5 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
   },
-  buttonText: { color: '#fff', fontWeight: '600' },
+  buttonText: { color: Colors.onPrimary, fontFamily: Fonts.heading },
 });

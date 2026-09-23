@@ -3,6 +3,7 @@ import { Clock, MapPin, Star } from 'lucide-react-native';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { MEDICAL_SHOPS } from '@/constants/mocks';
 
 export default function PharmacyListScreen() {
@@ -45,17 +46,17 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.border,
   },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  name: { fontSize: 16, fontWeight: '700', color: Colors.light.text },
+  name: { fontSize: 16, fontFamily: Fonts.heading, color: Colors.light.text },
   badge: {
     backgroundColor: Colors.status.error,
-    color: '#fff',
+    color: Colors.onPrimary,
     fontSize: 11,
-    fontWeight: '700',
+    fontFamily: Fonts.heading,
     borderRadius: 999,
     paddingHorizontal: 8,
     paddingVertical: 3,
     overflow: 'hidden',
   },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 8 },
-  meta: { color: Colors.light.textSecondary, fontSize: 13, marginRight: 8 },
+  meta: { fontFamily: Fonts.body, color: Colors.light.textSecondary, fontSize: 13, marginRight: 8 },
 });

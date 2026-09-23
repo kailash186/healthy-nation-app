@@ -46,3 +46,10 @@ marketing art, splash/onboarding visuals, or any static .png/.pdf artwork.
 Bundled OFL fonts are in `.claude/skills/canvas-design/canvas-fonts/`.
 Output design philosophy as `.md` alongside the final `.png`/`.pdf`; keep
 generated artwork out of the app bundle unless it is used in `assets/`.
+
+## Theming
+
+Use the `theme-factory` skill in `.claude/skills/theme-factory/` to restyle the
+app. Current theme: **Ocean Depths**. To switch, update `constants/colors.ts`
+and `constants/typography.ts` (add font files under `assets/fonts/` and
+register them in `app/_layout.tsx`), then re-shoot `docs/screenshots/`.

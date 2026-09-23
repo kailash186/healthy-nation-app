@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { MEDICAL_SHOPS } from '@/constants/mocks';
 
 const PAYMENT_METHODS = [
@@ -50,8 +51,8 @@ export default function CheckoutScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background, padding: 20 },
-  title: { fontSize: 20, fontWeight: '700', color: Colors.light.text },
-  subtitle: { color: Colors.light.textSecondary, marginTop: 4, marginBottom: 16 },
+  title: { fontSize: 20, fontFamily: Fonts.heading, color: Colors.light.text },
+  subtitle: { fontFamily: Fonts.body, color: Colors.light.textSecondary, marginTop: 4, marginBottom: 16 },
   option: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -63,9 +64,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  optionSelected: { borderColor: Colors.primary },
-  optionLabel: { color: Colors.light.text },
-  optionLabelSelected: { fontWeight: '600' },
+  optionSelected: { borderColor: Colors.primary, backgroundColor: Colors.seafoamTint },
+  optionLabel: { fontFamily: Fonts.body, color: Colors.light.text },
+  optionLabelSelected: { fontFamily: Fonts.heading },
   button: {
     marginTop: 20,
     backgroundColor: Colors.primary,
@@ -73,5 +74,5 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
   },
-  buttonText: { color: '#fff', fontWeight: '600' },
+  buttonText: { color: Colors.onPrimary, fontFamily: Fonts.heading },
 });

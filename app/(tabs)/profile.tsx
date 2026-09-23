@@ -2,6 +2,7 @@ import { ChevronRight, Shield, Smartphone, Settings as SettingsIcon } from 'luci
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { USER_PROFILE } from '@/constants/mocks';
 
 const SETTINGS = [
@@ -69,12 +70,14 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.navy,
+    borderWidth: 3,
+    borderColor: Colors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  avatarText: { color: '#fff', fontSize: 32, fontWeight: '700' },
-  name: { marginTop: 10, fontSize: 20, fontWeight: '700', color: Colors.light.text },
+  avatarText: { color: Colors.onPrimary, fontSize: 32, fontFamily: Fonts.heading },
+  name: { marginTop: 10, fontSize: 20, fontFamily: Fonts.heading, color: Colors.light.text },
   statsRow: { flexDirection: 'row', gap: 10, marginTop: 8 },
   stat: {
     flex: 1,
@@ -85,9 +88,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  statValue: { fontWeight: '700', color: Colors.light.text },
-  statLabel: { fontSize: 12, color: Colors.light.textSecondary, marginTop: 2 },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: Colors.light.text, marginTop: 24, marginBottom: 10 },
+  statValue: { fontFamily: Fonts.heading, color: Colors.light.text },
+  statLabel: { fontFamily: Fonts.body, fontSize: 12, color: Colors.light.textSecondary, marginTop: 2 },
+  sectionTitle: { fontSize: 18, fontFamily: Fonts.heading, color: Colors.light.text, marginTop: 24, marginBottom: 10 },
   historyItem: {
     backgroundColor: Colors.surface,
     borderRadius: 12,
@@ -96,9 +99,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  historyDate: { fontSize: 12, color: Colors.light.textSecondary },
-  historyTitle: { fontWeight: '600', color: Colors.light.text, marginTop: 2 },
-  historyResult: { color: Colors.light.textSecondary, marginTop: 2, fontSize: 13 },
+  historyDate: { fontFamily: Fonts.body, fontSize: 12, color: Colors.light.textSecondary },
+  historyTitle: { fontFamily: Fonts.heading, color: Colors.light.text, marginTop: 2 },
+  historyResult: { fontFamily: Fonts.body, color: Colors.light.textSecondary, marginTop: 2, fontSize: 13 },
   settingRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -110,5 +113,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  settingLabel: { flex: 1, color: Colors.light.text, fontWeight: '500' },
+  settingLabel: { flex: 1, color: Colors.light.text, fontFamily: Fonts.body },
 });

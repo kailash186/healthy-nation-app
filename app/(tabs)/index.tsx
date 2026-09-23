@@ -14,7 +14,8 @@ import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-nati
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors } from '@/constants/colors';
-import { APPOINTMENTS, DOCTORS, VITALS, type Vital } from '@/constants/mocks';
+import { Fonts } from '@/constants/typography';
+import { APPOINTMENTS, DOCTORS, USER_PROFILE, VITALS, type Vital } from '@/constants/mocks';
 
 const VITAL_ICONS: Record<Vital['icon'], typeof Heart> = {
   Heart,
@@ -44,13 +45,20 @@ export default function HomeScreen() {
       contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
       testID="home-screen"
     >
+      <View style={styles.hero}>
+        <Text style={styles.heroGreeting}>Good morning, {USER_PROFILE.name.split(' ')[0]}</Text>
+        <Text style={styles.heroSubtitle}>All vitals within normal range today</Text>
+      </View>
+
       <Text style={styles.sectionTitle}>Daily Vitals</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
         {VITALS.map((vital) => {
           const Icon = VITAL_ICONS[vital.icon];
           return (
             <View key={vital.id} style={styles.vitalCard}>
-              <Icon color={Colors.primary} size={22} />
+              <View style={styles.iconBubble}>
+                <Icon color={Colors.primary} size={20} />
+              </View>
               <Text style={styles.vitalValue}>
                 {vital.value}
                 <Text style={styles.vitalUnit}> {vital.unit}</Text>
@@ -71,7 +79,9 @@ export default function HomeScreen() {
       <View style={styles.grid}>
         {services.map(({ label, icon: Icon, onPress }) => (
           <Pressable key={label} style={styles.serviceCard} onPress={onPress}>
-            <Icon color={Colors.accent} size={24} />
+            <View style={styles.iconBubble}>
+              <Icon color={Colors.primary} size={22} />
+            </View>
             <Text style={styles.serviceLabel}>{label}</Text>
           </Pressable>
         ))}
@@ -93,7 +103,7 @@ export default function HomeScreen() {
                 style={styles.videoButton}
                 onPress={() => Alert.alert('Video call', 'Joining consultation (demo).')}
               >
-                <Video color="#fff" size={18} />
+                <Video color={Colors.onPrimary} size={18} />
               </Pressable>
             )}
           </View>
@@ -105,9 +115,19 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
+  hero: {
+    backgroundColor: Colors.navy,
+    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingBottom: 28,
+    borderBottomLeftRadius: 28,
+    borderBottomRightRadius: 28,
+  },
+  heroGreeting: { fontFamily: Fonts.heading, fontSize: 22, color: Colors.onPrimary },
+  heroSubtitle: { fontFamily: Fonts.body, fontSize: 14, color: Colors.secondary, marginTop: 4 },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '700',
+    fontFamily: Fonts.heading,
     color: Colors.light.text,
     marginHorizontal: 16,
     marginTop: 20,
@@ -122,10 +142,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  vitalValue: { fontSize: 20, fontWeight: '700', color: Colors.light.text, marginTop: 8 },
-  vitalUnit: { fontSize: 12, fontWeight: '400', color: Colors.light.textSecondary },
-  vitalLabel: { fontSize: 13, color: Colors.light.textSecondary, marginTop: 2 },
-  trend: { fontSize: 12, color: Colors.status.success, marginTop: 4, textTransform: 'capitalize' },
+  iconBubble: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: Colors.seafoamTint,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  vitalValue: { fontSize: 20, fontFamily: Fonts.heading, color: Colors.light.text, marginTop: 8 },
+  vitalUnit: { fontFamily: Fonts.body, fontSize: 12, color: Colors.light.textSecondary },
+  vitalLabel: { fontFamily: Fonts.body, fontSize: 13, color: Colors.light.textSecondary, marginTop: 2 },
+  trend: { fontFamily: Fonts.body, fontSize: 12, color: Colors.status.success, marginTop: 4, textTransform: 'capitalize' },
   banner: {
     marginHorizontal: 16,
     marginTop: 20,
@@ -133,8 +161,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 18,
   },
-  bannerTitle: { color: '#fff', fontSize: 17, fontWeight: '700' },
-  bannerSubtitle: { color: '#E0ECFF', marginTop: 4 },
+  bannerTitle: { color: Colors.onPrimary, fontSize: 17, fontFamily: Fonts.heading },
+  bannerSubtitle: { fontFamily: Fonts.body, color: Colors.secondary, marginTop: 4 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 16, gap: 12 },
   serviceCard: {
     width: '47%',
@@ -145,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  serviceLabel: { marginTop: 8, fontWeight: '600', color: Colors.light.text },
+  serviceLabel: { marginTop: 8, fontFamily: Fonts.heading, color: Colors.light.text },
   appointmentCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -157,7 +185,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  appointmentDoctor: { fontWeight: '700', color: Colors.light.text },
-  appointmentMeta: { color: Colors.light.textSecondary, marginTop: 2, fontSize: 13 },
-  videoButton: { backgroundColor: Colors.accent, borderRadius: 999, padding: 10 },
+  appointmentDoctor: { fontFamily: Fonts.heading, color: Colors.light.text },
+  appointmentMeta: { fontFamily: Fonts.body, color: Colors.light.textSecondary, marginTop: 2, fontSize: 13 },
+  videoButton: { backgroundColor: Colors.primary, borderRadius: 999, padding: 10 },
 });

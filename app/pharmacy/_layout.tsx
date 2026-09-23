@@ -1,13 +1,16 @@
 import { Stack } from 'expo-router';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 
 export default function PharmacyLayout() {
   return (
     <Stack
       screenOptions={{
-        headerTintColor: Colors.light.text,
-        headerStyle: { backgroundColor: Colors.surface },
+        headerTintColor: Colors.onPrimary,
+        headerStyle: { backgroundColor: Colors.navy },
+        headerTitleStyle: { fontFamily: Fonts.heading, color: Colors.onPrimary },
+        headerShadowVisible: false,
         contentStyle: { backgroundColor: Colors.background },
       }}
     >

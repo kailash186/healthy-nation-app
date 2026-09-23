@@ -2,16 +2,20 @@ import { Tabs } from 'expo-router';
 import { Activity, Home, MessageSquareHeart, Stethoscope, User } from 'lucide-react-native';
 
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tabIconSelected,
+        tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.light.tabIconDefault,
-        headerStyle: { backgroundColor: Colors.surface },
-        headerTintColor: Colors.light.text,
+        tabBarLabelStyle: { fontFamily: Fonts.body, fontSize: 11 },
         tabBarStyle: { backgroundColor: Colors.surface, borderTopColor: Colors.light.border },
+        headerStyle: { backgroundColor: Colors.navy },
+        headerTintColor: Colors.onPrimary,
+        headerTitleStyle: { fontFamily: Fonts.heading, color: Colors.onPrimary, fontSize: 18 },
+        headerShadowVisible: false,
       }}
     >
       <Tabs.Screen

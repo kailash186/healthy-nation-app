@@ -40,6 +40,20 @@ An AI-powered mobile health monitoring application designed to address early det
 - **Distance Tracking**: Steps and distance walked
 - **Real-time Sync**: Live data synchronization from wearable devices
 
+## Design
+
+The app uses the **Ocean Depths** theme from the bundled `theme-factory` skill:
+
+| Role | Colour |
+|---|---|
+| Deep Navy `#1a2332` | headers, hero, primary text |
+| Teal `#2d8b8b` | primary actions, active tab |
+| Seafoam `#a8dadc` | secondary accents, chips |
+| Cream `#f1faee` | app background |
+
+Typography: Instrument Sans (Regular/Bold), loaded from `assets/fonts/` via `expo-font`.
+Tokens live in `constants/colors.ts` and `constants/typography.ts`.
+
 ## Screenshots
 
 ![All screens](docs/screenshots/overview.png)

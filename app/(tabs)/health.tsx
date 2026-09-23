@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import BluetoothScanner, { type WearableDevice } from '@/components/BluetoothScanner';
 import { Colors } from '@/constants/colors';
+import { Fonts } from '@/constants/typography';
 import { HEALTH_PARAMETERS, VITALS } from '@/constants/mocks';
 
 export default function HealthScreen() {
@@ -13,7 +14,7 @@ export default function HealthScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.deviceCard}>
-        <Watch color={Colors.primary} size={28} />
+        <Watch color={Colors.secondary} size={28} />
         <View style={{ flex: 1 }}>
           <Text style={styles.deviceTitle}>{device ? device.name : 'No device connected'}</Text>
           <Text style={styles.deviceMeta}>
@@ -21,10 +22,10 @@ export default function HealthScreen() {
           </Text>
         </View>
         {device ? (
-          <BatteryMedium color={Colors.status.success} size={22} />
+          <BatteryMedium color={Colors.secondary} size={22} />
         ) : (
           <Pressable style={styles.connectButton} onPress={() => setScannerVisible(true)}>
-            <Bluetooth color="#fff" size={16} />
+            <Bluetooth color={Colors.onPrimary} size={16} />
             <Text style={styles.connectText}>Connect</Text>
           </Pressable>
         )}
@@ -71,14 +72,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    backgroundColor: Colors.surface,
+    backgroundColor: Colors.navy,
     borderRadius: 16,
     padding: 16,
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  deviceTitle: { fontWeight: '700', color: Colors.light.text },
-  deviceMeta: { color: Colors.light.textSecondary, fontSize: 13, marginTop: 2 },
+  deviceTitle: { fontFamily: Fonts.heading, color: Colors.onPrimary },
+  deviceMeta: { fontFamily: Fonts.body, color: Colors.secondary, fontSize: 13, marginTop: 2 },
   connectButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,8 +89,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 8,
   },
-  connectText: { color: '#fff', fontWeight: '600', fontSize: 13 },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: Colors.light.text, marginTop: 24, marginBottom: 10 },
+  connectText: { color: Colors.onPrimary, fontFamily: Fonts.heading, fontSize: 13 },
+  sectionTitle: { fontSize: 18, fontFamily: Fonts.heading, color: Colors.light.text, marginTop: 24, marginBottom: 10 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   metric: {
     width: '47%',
@@ -99,9 +100,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.border,
   },
-  metricLabel: { color: Colors.light.textSecondary, fontSize: 13 },
-  metricValue: { fontSize: 20, fontWeight: '700', color: Colors.light.text, marginTop: 4 },
-  metricUnit: { fontSize: 12, fontWeight: '400', color: Colors.light.textSecondary },
+  metricLabel: { fontFamily: Fonts.body, color: Colors.light.textSecondary, fontSize: 13 },
+  metricValue: { fontSize: 20, fontFamily: Fonts.heading, color: Colors.light.text, marginTop: 4 },
+  metricUnit: { fontFamily: Fonts.body, fontSize: 12, color: Colors.light.textSecondary },
   rangeRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -109,6 +110,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: Colors.light.border,
   },
-  rangeLabel: { color: Colors.light.text },
-  rangeValue: { color: Colors.light.textSecondary },
+  rangeLabel: { fontFamily: Fonts.body, color: Colors.light.text },
+  rangeValue: { fontFamily: Fonts.body, color: Colors.light.textSecondary },
 });
